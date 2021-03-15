@@ -1,5 +1,7 @@
 package exercises
 
+import u02.Modules.Person
+import u02.Modules.Person.Teacher
 import u03.Lists.List._
 import u03.Lists._
 import u02.Optionals.Option._
@@ -8,7 +10,7 @@ import u02.Optionals._
 object Lists {
   /*
     1.  Consider the List type introduced in class. Analogously to sum and
-    append, create the following functions:
+      append, create the following functions:
       a) def drop[A](l: List[A], n: Int): List[A]
       b) def flatMap[A,B](l: List[A])(f: A => List[B]): List[B]
       c) Write map in terms of flatMap
@@ -37,7 +39,6 @@ object Lists {
     2.  Considering both List and Option, create the following:
         def max(l: List[Int]): Option[Int]
    */
-
   def max(l: List[Int]): Option[Int] = l match {
     case Cons(h, t) => {
       val ll : List[Int] = filter(l)( _ > h)
@@ -46,5 +47,14 @@ object Lists {
     }
     case Nil() => None()
   }
+
+  /*
+    3.  Consider Person and List. Create a function that takes a list of Persons
+        and returns a list containing only the courses of Teachers in that list
+   */
+  def getCourses(people: List[Person]): List[String] =
+    map(filter(people)(_.isInstanceOf[Teacher]))(t => t.asInstanceOf[Teacher].course)
+
+  
 
 }

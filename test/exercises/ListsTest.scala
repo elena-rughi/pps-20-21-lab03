@@ -3,7 +3,10 @@ package exercises
 import exercises.Lists._
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import u02.Modules.Person
+import u02.Modules.Person.{Student, Teacher}
 import u03.Lists.List._
+import u03.Lists._
 import u02.Optionals.Option.Some
 
 class ListsTest {
@@ -44,6 +47,29 @@ class ListsTest {
 
     assertEquals( Some(50).toString(),
       max(Cons(43 , Cons(50 , Cons(50 , Nil())))).toString())
+  }
+
+  @Test def testGetCourses() = {
+
+    val people : List[Person] =
+                  Cons(Teacher("Mario", "Italian"),
+                  Cons(Student("Joe", 3),
+                  Cons(Student("Marianna", 2),
+                  Cons(Teacher("Steve", "History"),
+                  Cons(Teacher("Anna", "Math"), Nil())))))
+
+/*
+    val p1 : Person = Teacher("Mario", "Italian")
+    val p2 : Person = Student("Marianna", 2)
+    val p3 : Person = Teacher("Anna", "Math")
+
+    val ppl = Cons(p1, Cons(p2, Cons(p3, Nil())))
+
+ */
+
+    val courses = Cons("Italian", Cons("History", Cons("Math", Nil())))
+
+    assertEquals(courses.toString(), getCourses(people).toString())
   }
 
 }
