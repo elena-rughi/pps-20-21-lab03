@@ -24,9 +24,11 @@ object Lists {
     case Nil() => Nil()
   }
 
-
   def myMap[A,B](l: List[A])(mapper: A => B): List[B] = flatMap(l)(v => Cons(mapper(v), Nil()))
 
-
+  def myFilter[A](l: List[A])(pred: A => Boolean): List[A] = flatMap(l)(v => {
+    if (pred(v)) Cons(v, Nil())
+    else Nil()
+  })
 
 }
