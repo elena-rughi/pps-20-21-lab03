@@ -1,6 +1,7 @@
 package exercises
 
 import u03.Lists._
+import u03.Lists.List._
 
 object Lists {
   /*
@@ -14,8 +15,13 @@ object Lists {
 
   // select all the elements except the first n elements of the list.
   def drop[A](l: List[A], n: Int): List[A] = (l, n) match {
-    case (List.Cons(h, t), n) if n > 0 && h != List.Nil() => drop(t, n-1)
+    case (Cons(h, t), n) if n > 0 && h != Nil() => drop(t, n-1)
     case _ => l
+  }
+
+  def flatMap[A,B](l: List[A])(f: A => List[B]): List[B] = l match {
+    case Cons(h, t) => append(f(h), flatMap(t)(f))
+    case Nil() => Nil()
   }
 
 }
