@@ -1,9 +1,10 @@
 package exercises
 
+import exercises.Lists._
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import u03.Lists.List._
-import exercises.Lists._
+import u02.Optionals.Option.Some
 
 class ListsTest {
 
@@ -35,6 +36,14 @@ class ListsTest {
     val lst = Cons(10, Cons(20, Cons(30, Nil()))) // 10 20 30
     assertEquals( filter[Int](lst)(_ >=20).toString(),
                   myFilter[Int](lst)(_ >=20).toString())
+  }
+
+  @Test def testMax() = {
+    assertEquals( Some(25).toString(),
+                  max(Cons(10 , Cons(25 , Cons(20 , Nil())))).toString())
+
+    assertEquals( Some(50).toString(),
+      max(Cons(43 , Cons(50 , Cons(50 , Nil())))).toString())
   }
 
 }
