@@ -63,10 +63,14 @@ class ListsTest {
 
   @Test def testFold() = {
     val lst = Cons(3, Cons(7, Cons(1, Cons(5, Nil())))) //3 7 1 5
-    //assertEquals(2, foldLeft[Int, Int](Nil())(2)(_-_))
-    //assertEquals(-16, foldLeft(lst)(0)(_-_))
+    assertEquals(-16, foldLeft(lst)(0)(_-_))
+    assertEquals(-14.8, toTwoDecimals(foldLeft(lst)(1.2)(_-_)))
     assertEquals(-8, foldRight(lst)(0)(_-_))
+    assertEquals(210, foldRight(lst)(2)(_*_))
     assertEquals(-6.8, toTwoDecimals(foldRight(lst)(1.2)(_-_)))
+
+    assertEquals(2, foldLeft[Int, Int](Nil())(2)(_*_))
+    assertEquals(2, foldRight[Int, Int](Nil())(2)(_*_))
   }
 
   private def toTwoDecimals(in: Double): Double =
