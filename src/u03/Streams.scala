@@ -40,6 +40,7 @@ object Streams {
     }
 
     def iterate[A](init: => A)(next: A => A): Stream[A] = cons(init, iterate(next(init))(next))
+
   }
 }
 
