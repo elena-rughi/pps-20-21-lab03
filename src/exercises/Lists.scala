@@ -40,7 +40,7 @@ object Lists {
         def max(l: List[Int]): Option[Int]
    */
   def max(l: List[Int]): Option[Int] = l match {
-    case Cons(h, t) => {
+    case Cons(h, _) => {
       val ll : List[Int] = filter(l)( _ > h)
       if (ll == Nil()) Some(h)
       else max(ll)
@@ -55,6 +55,34 @@ object Lists {
   def getCourses(people: List[Person]): List[String] =
     map(filter(people)(_.isInstanceOf[Teacher]))(t => t.asInstanceOf[Teacher].course)
 
-  
 
+  /*
+    4.  (Hard) Implement two fold functions (foldLeft, foldRight) that
+        “fold over” lists by “accumulating” elements via a binary operator.
+
+        -  Idea: given a list [3,7,1,5] a left-fold (resp., right-fold) through e.g.
+           operator + is given by (((0+3)+7)+1)+5 (resp., 3+(7+(1+(5+0)))).
+
+        -  Note: dealing with empty lists requires providing a default or initial value
+           for the accumulation, to be used on left or on right (the function
+           corresponding to fold which fails on empty lists is called reduce).
+
+        -  Note: the type of the accumulator may be different wrt the type of the
+           elements that are aggregated (two generic variables should be used)
+
+        -  Hint: do foldLeft(l), it is easier. Then, foldRight(l) ≈
+           foldLeft(reverse(l)). Any efficient solution for foldRight(l)?
+   */
+/*
+  def foldLeft[B, A <: B](l: List[A])(init: B)(f: (B, A) => B): B = l match {
+    case Cons(h, t) => f(init, foldLeft(t)(h)(f))
+    case Nil() => _
+  }
+
+ */
+
+  def foldRight[A, B](l: List[A])(init: B)(f: (A, B) => B): B = l match {
+    case Cons(h, t) => f(h, foldRight(t)(init)(f))
+    case Nil() => init
+  }
 }

@@ -50,26 +50,26 @@ class ListsTest {
   }
 
   @Test def testGetCourses() = {
-
     val people : List[Person] =
                   Cons(Teacher("Mario", "Italian"),
                   Cons(Student("Joe", 3),
                   Cons(Student("Marianna", 2),
                   Cons(Teacher("Steve", "History"),
                   Cons(Teacher("Anna", "Math"), Nil())))))
-
-/*
-    val p1 : Person = Teacher("Mario", "Italian")
-    val p2 : Person = Student("Marianna", 2)
-    val p3 : Person = Teacher("Anna", "Math")
-
-    val ppl = Cons(p1, Cons(p2, Cons(p3, Nil())))
-
- */
-
     val courses = Cons("Italian", Cons("History", Cons("Math", Nil())))
 
     assertEquals(courses.toString(), getCourses(people).toString())
   }
+
+  @Test def testFold() = {
+    val lst = Cons(3, Cons(7, Cons(1, Cons(5, Nil())))) //3 7 1 5
+    //assertEquals(2, foldLeft[Int, Int](Nil())(2)(_-_))
+    //assertEquals(-16, foldLeft(lst)(0)(_-_))
+    assertEquals(-8, foldRight(lst)(0)(_-_))
+    assertEquals(-6.8, toTwoDecimals(foldRight(lst)(1.2)(_-_)))
+  }
+
+  private def toTwoDecimals(in: Double): Double =
+    BigDecimal(in).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
 
 }
