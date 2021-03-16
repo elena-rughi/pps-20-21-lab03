@@ -1,8 +1,9 @@
 package exercises
 
 import org.junit.jupiter.api.Test
-import exercises.Streams._
 import org.junit.jupiter.api.Assertions.assertEquals
+import exercises.Streams._
+import exercises.Streams.Stream._
 import u03.Lists.List._
 
 class StreamsTest {
@@ -13,5 +14,9 @@ class StreamsTest {
                   Stream.toList(Stream.drop(s)(6)).toString())
   }
 
+  @Test def testConstant() = {
+    assertEquals(Cons("x", Cons("x", Cons("x", Cons("x", Cons("x", Nil()))))).toString(),
+                  Stream.toList(Stream.take(constant("x"))(5)).toString())
+  }
 
 }
