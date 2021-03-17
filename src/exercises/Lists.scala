@@ -19,7 +19,7 @@ object Lists {
 
   // select all the elements except the first n elements of the list.
   def drop[A](l: List[A], n: Int): List[A] = (l, n) match {
-    case (Cons(h, t), n) if n > 0 && h != Nil() => drop(t, n-1)
+    case (Cons(h, t), n) if n > 0 => drop(t, n-1)
     case _ => l
   }
 
